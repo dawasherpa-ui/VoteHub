@@ -98,7 +98,7 @@ const supabaseDB=async(e)=>{
               Name{" "}
             </Typography>
             <input
-              style={{ padding: "10px", fontSize: "16px"}}
+              style={{ padding: "10px", fontSize: "16px",backgroundColor:"white"}}
               onChange={(e) => setName(e.target.value)}
               value={name}
               id="name"
@@ -124,7 +124,7 @@ const supabaseDB=async(e)=>{
               Email{" "}
             </Typography>
             <input
-              style={{ padding: "10px", fontSize: "16px"}}
+              style={{ padding: "10px", fontSize: "16px",backgroundColor:"white"}}
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               id="email"
@@ -152,7 +152,7 @@ const supabaseDB=async(e)=>{
               id="password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
-              style={{ padding: "10px", fontSize: "16px"}}
+              style={{ padding: "10px", fontSize: "16px",backgroundColor:"white"}}
               type="password"
               placeholder="Password"
               required

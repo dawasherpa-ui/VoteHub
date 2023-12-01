@@ -65,7 +65,7 @@ export default function Login() {
               Email{" "}
             </Typography>
             <input
-              style={{ padding: "10px", fontSize: "16px" }}
+              style={{ padding: "10px", fontSize: "16px" ,backgroundColor:"white"}}
               onChange={(e)=>setEmail(e.target.value)}
               value={email}
               id="email"
@@ -93,7 +93,7 @@ export default function Login() {
               id="password"
               onChange={(e)=>setPassword(e.target.value)}
               value={password}
-              style={{ padding: "10px", fontSize: "16px" }}
+              style={{ padding: "10px", fontSize: "16px" ,backgroundColor:"white"}}
               type="password"
               placeholder="Password"
               required
