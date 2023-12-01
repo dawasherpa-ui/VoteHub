@@ -80,7 +80,7 @@ export default function Navbar() {
     e.preventDefault();
     if (image1 && image2) {
       await imageUploads();
-      
+
       setOpen(false);
       setImage1(null);
       setCaption("");
@@ -216,6 +216,8 @@ export default function Navbar() {
     }
     if (newValue === "1") {
       setImage1(null);
+      setSelectedImage(null);
+      setSelectedImage2(null);
       setImage2(null);
     }
   };
