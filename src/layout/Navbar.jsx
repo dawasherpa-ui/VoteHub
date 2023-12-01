@@ -6,10 +6,12 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  IconButton,
   List,
   ListItem,
   Menu,
   MenuItem,
+  Snackbar,
   Typography,
 } from "@mui/material";
 import React, { useState, useRef, useEffect } from "react";
@@ -30,6 +32,7 @@ import { useContext } from "react";
 import { Context } from "../tools/AuthContext";
 import { supabase } from "../tools/Supabase";
 import Banner from "../components/profile/Banner";
+import CloseIcon from '@mui/icons-material/Close';
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
@@ -42,6 +45,44 @@ export default function Navbar() {
   const [search, setSearch] = useState("");
   const imageInputRef = useRef(null);
   const searchInput = search.trim().replace(/\s+/g, " ");
+  const [openSnack2, setOpenSnack2] = React.useState(false);
+  const [openSnack, setOpenSnack] = React.useState(false);
+
+  const handleClickSnack = () => {
+    setOpenSnack(true);
+  };
+
+  const handleCloseSnack = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSnack(false);
+  };
+  const handleClickSnack2 = () => {
+    setOpenSnack2(true);
+  };
+
+  const handleCloseSnack2 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSnack2(false);
+  };
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        onClick={handleCloseSnack}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
+
 
   const getDetail = async (input) => {
     try {
@@ -79,17 +120,20 @@ export default function Navbar() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (image1 && image2) {
-      await imageUploads();
-
+      handleClickSnack()
       setOpen(false);
+      await imageUploads();
+      handleClickSnack2()
       setImage1(null);
       setCaption("");
       setImage2(null);
       setTextArea1("");
       setTextArea2("");
     } else if (textArea1.length > 0 && textArea2.length > 0) {
-      await firestoreCreate();
+      handleClickSnack()
       setOpen(false);
+      await firestoreCreate();
+      handleClickSnack2()
       setImage1(null);
       setCaption("");
       setImage2(null);
@@ -556,6 +600,22 @@ export default function Navbar() {
             </DialogActions>
           </form>
         </Dialog>
+      <div>
+      <Snackbar
+        open={openSnack}
+        autoHideDuration={5000}
+        onClose={handleCloseSnack}
+        message="Posting.."
+        action={action}
+      />
+      <Snackbar
+        open={openSnack2}
+        autoHideDuration={5000}
+        onClose={handleCloseSnack2}
+        message="Done Posting"
+        action={action}
+      />
+    </div>
       </List>
     </Box>
   );

@@ -47,7 +47,7 @@ const darkTheme = createTheme({
       main: '#FF6B6B', // Dark theme's secondary color 2 (error/red)
     },
     background: {
-      default: 'black', // Dark theme's background color (dark gray)
+      default: '#000', // Dark theme's background color (dark gray)
       paper: 'rgba(19, 18, 19, 1)', // Dark theme's paper background (darker gray)
     },
     text: {
