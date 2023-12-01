@@ -47,7 +47,7 @@ export default function Navbar() {
   const searchInput = search.trim().replace(/\s+/g, " ");
   const [openSnack2, setOpenSnack2] = React.useState(false);
   const [openSnack, setOpenSnack] = React.useState(false);
-
+const {updatePost} = useContext(Context);
   const handleClickSnack = () => {
     setOpenSnack(true);
   };
@@ -124,6 +124,7 @@ export default function Navbar() {
       setOpen(false);
       await imageUploads();
       handleClickSnack2()
+      updatePost()
       setImage1(null);
       setCaption("");
       setImage2(null);
@@ -134,6 +135,7 @@ export default function Navbar() {
       setOpen(false);
       await firestoreCreate();
       handleClickSnack2()
+      updatePost()
       setImage1(null);
       setCaption("");
       setImage2(null);

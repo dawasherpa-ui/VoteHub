@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { auth, db } from "../tools/Firebase";
 import { collection, orderBy } from "firebase/firestore";
 import { query, where, getDocs, limit } from "firebase/firestore";
 import Postcard from "./Postcard";
 import { Box, Skeleton } from "@mui/material";
 import { supabase } from "../tools/Supabase";
-
+import { Context } from "../tools/AuthContext";
 export default function Post({ path, id }) {
   const [post, setPost] = useState([]);
   const [load, setLoad] = useState(true);
   const [uids, setUids] = useState([]);
-
+  const {update}=useContext(Context)
+  useEffect(()=>{
+    updateData();
+  },[update])
   const handlePostUpdate = () => {
     updateData();
   };

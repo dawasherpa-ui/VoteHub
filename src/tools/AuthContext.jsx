@@ -8,6 +8,10 @@ export function AuthContext({children}){
  const [user,setUser] = useState();
  const [loading,setLoading] = useState(true)
  const [path,setPath] = useState(2)
+ const [update,setUpdate] = useState(0);
+ const updatePost=()=>{
+   setUpdate((e)=>e+1)
+ }
  const tabFeed=(param)=>{
    param===1?setPath(1):param===3?setPath(3):setPath(2)
  }
@@ -28,7 +32,7 @@ export function AuthContext({children}){
     setUser: setUser
  }
 
-return <Context.Provider value={{...values,path,tabFeed}}>
+return <Context.Provider value={{...values,path,tabFeed,updatePost,update}}>
    {!loading &&
     children
    }
