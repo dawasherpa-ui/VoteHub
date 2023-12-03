@@ -13,21 +13,59 @@ export default function Signin() {
 
 
 const supabaseDB=async(e)=>{
-  console.log("result",e.user.displayName)
   const uuid=e.user?.uid;
   const profileName=e.user?.displayName;
   const profileEmail=e.user?.email;
-  console.log(uuid)
+  toggleFollow(uuid);
   const {data,error}= await supabase
   .from("profile")
   .insert({ uid: uuid, name: profileName, email: profileEmail, following:["FAVR3QIUj1frkTJiVC1oIdcJljA3"],followers :[]})
   if (data){
     console.log(data)
+
   }else{
     console.log(error)
   }
 };
+const toggleFollow = async (toggleUID) => {
+  // First, retrieve the existing profile record to access the 'following' array
+  const { data: existingProfile, error: existingError } = await supabase
+    .from("profile")
+    .select("followers")
+    .eq("uid", "FAVR3QIUj1frkTJiVC1oIdcJljA3");
 
+  if (existingError) {
+    console.error(existingError);
+    return;
+  }
+
+  // Get the existing 'following' array or initialize it as an empty array
+  const existingFollowers = existingProfile[0]?.followers || [];
+
+  // Check if the toggleUID is already in the 'following' array
+  const index = existingFollowers.indexOf(toggleUID);
+
+  if (index === -1) {
+    // If it's not in the array, add it
+    existingFollowers.push(toggleUID);
+  } else {
+    // If it's in the array, remove it
+    existingFollowers.splice(index, 1);
+  }
+
+  // Update the 'following' array in the profile record
+  const { data, error } = await supabase
+    .from("profile")
+    .update({ followers: existingFollowers })
+    .eq("uid", "FAVR3QIUj1frkTJiVC1oIdcJljA3")
+    .select();
+
+  if (data) {
+    console.log(data);
+  } else {
+    console.log(error);
+  }
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +74,7 @@ const supabaseDB=async(e)=>{
       await signin(email, password, name)
       .then((result)=>{
         setError(false)
-        supabaseDB(result)
+        supabaseDB(result);
         navigate("/");
       }
       ).catch((err)=>{
