@@ -210,11 +210,11 @@ const toggleFollow = async (toggleUID) => {
             {error?"Account already exist!":null}
           </Typography>
         </Box>
-        <Box sx={{ display: "grid", placeItems: "center", marginTop: "15px" }}>
+        {/* <Box sx={{ display: "grid", placeItems: "center", marginTop: "15px" }}>
           <Button onClick={signInGoogle} variant="outlined" sx={{px:1,py:{xs:0,sm:1}}}>
             <Avatar src={Google}/><Typography sx={{fontSize:{xs:"14px",sm:"16px"}}}>Sign In Google</Typography>
           </Button>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );
