@@ -206,7 +206,7 @@ export default function Profile({ uid }) {
           >
             <img
               style={{ height: "100%", width: "100%", objectFit: "cover" }}
-              src={Image}
+              src={"https://source.unsplash.com/random/?background/"}
               alt="Cover pic"
             />
           </Box>
